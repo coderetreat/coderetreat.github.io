@@ -2,28 +2,39 @@
 layout: base
 title: Global Day Of Coderetreat
 audience: participants
-extraStyles: ["/js/bundled/events.css"]
 description: |
-    Global Day Of Coderetreat is a community event happening on November 6 - November 7 2020.
-    Join this year and practice your skills, embrace new paradigms and get to meet new people
-    from all over the world!
+  Global Day Of Coderetreat is a community event happening on November 6 - November 7 2020.
+  Join this year and practice your skills, embrace new paradigms and get to meet new people
+  from all over the world!
 ---
 
-<div class="container my-5">
-    <div>
-        <p class="lead">Global Day Of Coderetreat is a community event happening on <strong>November 6 - November 7
-                2020</strong>. Join this year and practice your skills, embrace new paradigms and get to meet new people
-            from all over the world!</p>
-        <p>With COVID-19 having a severe impact on the availability of on-site events, we're embracing the virtual
-            events we had in the past more than ever. We encourage you to stay safe. If an on-site event
-            isn't for you, we hope you'll find a remote event that matches your timezone.</p>
-        <p>If you're considering organizing your own event, we're here to support you on the journey of
-                organizing your first coderetreat. Head over to the <a
-                        href="{% link facilitators/index.html %}">Facilitators Section</a> for Training events, checklists,
-                facilitation videos and more!</p>
-        
-    </div>
+<div class="container py-3">
+  <p class="lead">
+    📅 Upcoming events (<a class="muted" href="{% link events/index.html %}"
+      >view all {{ site.data.events | size }} events</a
+    >)
+  </p>
+  <p>Show events in <select><option>all languages</option></select> starting as early as <input value="9:00"/> in <code>Europe/Berlin</code></p>
+  <table class="table">
+    <tbody>
+      {% for event in site.data.events %}
+      <tr {% if event[1].format == "ensemble" %} style="filter: grayscale(1); background: rgba(0, 0, 0, 0.1)"{% endif %}>
+        <th>{{ event[1].date.start }}</th>
+        <td>
+          <h5><a href="{{ event[1].url }}">{{ event[1].title }} <font color="red"><marquee>1 SLOT LEFT</marquee></font></a></h5>
+          {% if event[1].format == "classic" %}
+          <small><b>Format: </b>{{event[1].format}}</small>
+          <small><b>Language: </b>{{event[1].spoken_language}}</small>
+          <small><b>5</b> people attending...</small>
+          {% if event[1].code_of_conduct %}<small>{{ event[1].code_of_conduct }}</small>{% endif %}
+          {% endif %}
+        </td>
+        <td>
+          {% if event[1].location == "virtual" %}Virtual{% else %}{{
+          event[1].location.city }} {{ event[1].location.country }} {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
-<div id="events">
-</div>
-<script type="application/javascript" src="{{ "/js/bundled/events.js" | relative_url }}"></script>

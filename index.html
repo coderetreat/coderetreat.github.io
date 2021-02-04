@@ -55,7 +55,7 @@ audience: participants
   </div>
 </div>
 
-<div class="py-md-5 pt-3 pb-5">
+<div class="py-md-5 pt-3 pb-5 d-none d-md-block">
   <div class="container">
     <p class="lead">
       Coderetreats are free day-long, intensive practice events, focusing on the fundamentals of software development
@@ -67,6 +67,31 @@ audience: participants
     <p class="lead">All over the world, people are coming together in small communities of practices to learn, explore
       and grow. Join us on the <strong>Global Day of Coderetreat</strong> or discover local communities around you!</p>
   </div>
+</div>
+
+<div class="container py-3">
+  <p class="lead">
+    📅 Upcoming events (<a class="muted" href="{% link events/index.html %}">view all {{ site.data.events | size }} events</a>)
+  </p>
+  <table class="table">
+    <tbody>
+      {% for event in site.data.events limit:5 %}
+      <tr>
+        <th>{{ event[1].date.start }}</th>
+        <td><a href="{{ event[1].url }}">{{ event[1].title }}</a></td>
+        <td>{% if event[1].location == "virtual" %}Virtual{% else %}{{ event[1].location.city }} {{ event[1].location.country }} {% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<div class="container py-3">
+  <p class="lead">
+    📅 No upcoming events
+  </p>
+  <a href="">Time to host one yourself!</a>
 </div>
 
 
